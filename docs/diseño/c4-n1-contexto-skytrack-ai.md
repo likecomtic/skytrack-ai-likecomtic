@@ -21,7 +21,7 @@ flowchart LR
   Auditor -->|Auditoría| Sky
 
   ERP <-->|CSV Import/Export| Sky
-  Flight -->|Referencia (offline)| Sky
+  Flight -->|"Referencia offline"| Sky
 ```
 
 **Notas**
