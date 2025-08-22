@@ -1,0 +1,23 @@
+<!doctype html><html lang="es"><head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>C4 N2 — Contenedores · SkyTrack AI</title>
+<style>
+body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; line-height:1.6; margin:2rem; max-width:960px; }
+pre { background:#0f172a; color:#e2e8f0; padding:1rem; border-radius:8px; overflow:auto; }
+code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+h1,h2,h3 { color:#0b3d5c; }
+ul { padding-left:1.2rem; }
+</style></head><body><h1>C4 — Nivel 2 (Contenedores) · SkyTrack AI</h1><p>**Fecha:** 2025-08-22</p><p>**Objetivo:** Descomponer el sistema en contenedores implementables.</p><pre><code>flowchart LR
+  UI[Web UI (futuro mínimo)] --&gt; API[API Gateway]
+  Client[Cliente REST / Postman] --&gt; API
+
+  API --&gt; SVC[Tracking Service]
+  SVC --&gt; DB[(Postgres)]
+  SVC --&gt; CSV[CSV Import/Export]
+
+  subgraph Futuro
+    IDP[Identity Service]
+  end
+
+  API -. JWT .-&gt; IDP
+</code></pre><p>**Notas**</p><ul><li>**Tracking Service** concentra el dominio: SupplyOrder + TrackingEvent.</li><li>**DB**: Postgres (consultas claras y reportes básicos). *(ADR‑001)*</li><li>**CSV Import/Export**: estrategia MVP con carpetas `csv/in` y `csv/out`. *(ADR‑003)*</li><li>**Identity**: a futuro; MVP con **JWT** simple. *(ADR‑004)*</li></ul></body></html>

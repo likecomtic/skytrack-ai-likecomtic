@@ -1,0 +1,41 @@
+<!doctype html><html lang="es"><head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>C4 N3 — Componentes · SkyTrack AI</title>
+<style>
+body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; line-height:1.6; margin:2rem; max-width:960px; }
+pre { background:#0f172a; color:#e2e8f0; padding:1rem; border-radius:8px; overflow:auto; }
+code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+h1,h2,h3 { color:#0b3d5c; }
+ul { padding-left:1.2rem; }
+</style></head><body><h1>C4 — Nivel 3 (Componentes) · SkyTrack AI</h1><p>**Fecha:** 2025-08-22</p><p>**Objetivo:** Descomponer el Tracking Service en componentes.</p><pre><code>flowchart LR
+  subgraph API[API Gateway]
+    OC[OrderController]
+    EC[EventController]
+  end
+
+  subgraph Dominio[Tracking Service]
+    OS[OrderService]
+    ES[EventService]
+    V[Validators]
+    M[Mappers]
+  end
+
+  subgraph Infra[Infra]
+    OR[OrderRepository]
+    ER[EventRepository]
+    DB[(Postgres)]
+    CSV[CSV Import/Export]
+  end
+
+  OC --&gt; OS
+  EC --&gt; ES
+  OS --&gt; OR
+  ES --&gt; ER
+  OR --&gt; DB
+  ER --&gt; DB
+  OS --&gt; V
+  ES --&gt; V
+  M --&gt; OR
+  M --&gt; ER
+  CSV --&gt; OS
+</code></pre><p>**Notas**</p><ul><li>Estado proyectado por eventos: `requested → picked → in_transit → delivered → verified`.</li><li>Idempotencia por clave natural `orderId + type + at`.</li><li>Errores típicos: `400` (type inválido), `404` (orderId no existe), `409` (duplicado idempotente).</li></ul></body></html>
