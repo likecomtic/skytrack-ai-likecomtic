@@ -18,6 +18,7 @@ flowchart LR
   end
 
   API -. "JWT" .-> IDP
+```
 
 **Notas**
 - **Tracking Service** concentra las reglas de negocio de `SupplyOrder` y `TrackingEvent`
@@ -27,4 +28,6 @@ flowchart LR
   (ej. `orders_YYYYMMDD.csv`, `reconciliation_YYYYMMDD.csv`). *(ADR-003)*
 - **Identity** queda fuera del MVP; por ahora **JWT** simple emitido/validado por la API. *(ADR-004)*
 - *(Opcional)* **Web UI** es futuro; en el MVP se interactúa vía API/cliente REST.
+
+
 
