@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<title>guia-estilo-idioma</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<style>
+  body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Arial, sans-serif; 
+         line-height: 1.5; padding: 2rem; color: #111;}
+  pre { white-space: pre-wrap; background:#f7f7f8; border:1px solid #e5e7eb; padding:1rem; border-radius:8px; }
+  code { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
+  h1,h2,h3,h4 { margin-top:1.25rem; }
+</style>
+</head>
+<body>
+<pre># Guía de estilo (idioma)
+
+**Fecha:** 2025-08-23
+
+## Propósito
+Alinear el idioma del proyecto para que documentación y clases sean **claras para hispanohablantes** y el **código sea estándar** para ingeniería.
+
+## Regla principal
+- **Documentación, clases, PRD, backlog, tickets, ADRs:** **Español**.
+- **Código (nombres de clases/métodos/variables, endpoints, claves JSON, nombres de carpetas):** **Inglés**.
+
+## Convenciones rápidas
+- Entidad en docs: “**Orden de Suministro**” → código: `SupplyOrder`  
+- Entidad en docs: “**Evento de Trazabilidad**” → código: `TrackingEvent`
+- Campos comunes (código): `id`, `createdAt`, `status`, `flightNumber`
+- Endpoints REST (inglés, kebab-case): `/supply-orders`, `/tracking-events`
+
+## Estados &amp; prioridades
+- Estados en backlog: `To Do` → `In Progress` → `In Review` → `Done`
+- Prioridad: `P0` (bloqueante), `P1` (alto), `P2` (medio), `P3` (bajo)
+
+## Commits (ejemplo)
+```
+feat(order): create supply order endpoint (POST /supply-orders)
+docs(prd): add acceptance criteria for on-time scenario
+```
+
+## Trazabilidad
+Cada ticket debe referenciar: PRD ⟷ C4 ⟷ tests ⟷ commit/PR.
+</pre>
+</body>
+</html>
