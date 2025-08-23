@@ -8,8 +8,8 @@
 flowchart TD
   A[Recibir POST /supply-orders] --> B{Validar payload}
   B -->|válido| C[Crear SupplyOrder + ítems]
-  B -->|inválido| E[(400 Bad Request)]
-  C --> D[Responder 201 { id }]
+  B -->|inválido| E((400 Bad Request))
+  C --> D[Responder 201 (id)]
 ```
 ## Puntos de revisión
 - Reglas de validación alineadas con negocio.
