@@ -4,11 +4,11 @@
 **Objetivo:** Ver el **flujo de valor** de "Crear SupplyOrder" en pasos entendibles para stakeholders.
 
 ## Flujo (alto nivel)
-```mermaid
+```
 flowchart TD
   A[Recibir POST /supply-orders] --> B{Validar payload}
-  B -- "valido" -->   C[Crear SupplyOrder e items]
-  B -- "invalido" --> E((400 Bad Request))
+  B -- valido --> C[Crear SupplyOrder e items]
+  B -- invalido --> E((400 Bad Request))
   C --> D[Responder 201 \(id\)]
 ```
 ## Puntos de revisión
