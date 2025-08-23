@@ -6,10 +6,10 @@
 ## Flujo (alto nivel)
 ```mermaid
 flowchart TD
-  A["Recibir POST /supply-orders"] --> B{"Validar payload"}
-  B -->|válido|   C["Crear SupplyOrder + ítems"]
-  B -->|inválido| E(("400 Bad Request"))
-  C --> D["Responder 201 (id)"]
+  A[Recibir POST /supply-orders] --> B{Validar payload}
+  B -- "valido" -->   C[Crear SupplyOrder e items]
+  B -- "invalido" --> E((400 Bad Request))
+  C --> D[Responder 201 \(id\)]
 ```
 ## Puntos de revisión
 - Reglas de validación alineadas con negocio.
