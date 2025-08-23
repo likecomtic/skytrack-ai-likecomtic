@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<title>backlog-inicial</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<style>
+  body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Arial, sans-serif; 
+         line-height: 1.5; padding: 2rem; color: #111;}
+  pre { white-space: pre-wrap; background:#f7f7f8; border:1px solid #e5e7eb; padding:1rem; border-radius:8px; }
+  code { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
+  h1,h2,h3,h4 { margin-top:1.25rem; }
+</style>
+</head>
+<body>
+<pre># Backlog inicial — SkyTrack AI
+
+**Fecha:** 2025-08-23
+
+## Épicas
+- **E1. Gestión de órdenes de suministro** (SupplyOrder)
+- **E2. Trazabilidad operacional** (TrackingEvent)
+- **E3. Observabilidad &amp; Operación** (Logs/Métricas/Alertas)
+- **E4. Seguridad** (JWT, roles, TLS)
+
+## Historias iniciales
+- **H1. Crear Orden de Suministro**
+  - *Como* Supervisor, *quiero* registrar una `SupplyOrder` con `flightNumber` e `items`,
+    *para* dar trazabilidad al proceso.
+  - Criterios: 201 con `id`; validaciones básicas; persistencia.
+- **H2. Registrar Evento de Trazabilidad**
+  - *Como* Operador, *quiero* anexar un `TrackingEvent` (p.ej., `picked`, `in_transit`, `delivered`)
+    *para* actualizar el estado real de la orden.
+
+## Definición de Listo (DoR)
+- Aceptación definida (Given/When/Then), dependencias conocidas, diseño C4 vinculado.
+
+## Definición de Hecho (DoD)
+- Código + pruebas + documentación mínima + ejemplos en Postman + métricas básicas.
+</pre>
+</body>
+</html>
