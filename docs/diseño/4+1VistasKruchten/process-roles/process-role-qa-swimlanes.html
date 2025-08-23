@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="es"><head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Procesos por Rol — QA / Testing</title>
+<style>
+body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; line-height:1.6; margin:2rem; max-width:960px; }
+pre { background:#0f172a; color:#e2e8f0; padding:1rem; border-radius:8px; overflow:auto; }
+code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+h1, h2 { color:#0b3d5c; }
+ul { padding-left:1.1rem; }
+</style></head><body>
+<h1>Vista de Procesos por Rol · SkyTrack AI — QA / Testing</h1>
+<p><strong>Fecha:</strong> ** 2025-08-23</p>
+<p><strong>Rol:</strong> ** QA / Testing</p>
+<p><strong>Objetivo:</strong> ** Probar flujos con **rutas felices** y **rutas de error** verificables.</p>
+
+<h2>Swimlanes (sistemas y checks)</h2>
+<pre><code>
+flowchart LR
+  subgraph Cliente
+    A[POST /supply-orders]
+  end
+  subgraph API_GW[API Gateway]
+    B[Validar formato y auth]
+  end
+  subgraph Servicio[OrderService]
+    C[Validaciones de negocio]
+    D[Crear orden + ítems]
+  end
+  subgraph DB[Postgres]
+    E[(Persistir)]
+  end
+
+  A --&gt; B --&gt; C
+  C --&gt;|válido| D --&gt; E
+  C --&gt;|inválido| X[(400 Bad Request)]
+  E --&gt; R[201 { id }]
+  R --&gt; A
+</code></pre>
+<h2>Puntos de prueba</h2>
+<ul>
+<li>201 con `id` cuando el payload es válido.</li>
+<li>400 cuando `payload` tiene errores.</li>
+<li>(Si aplica) 409 por duplicado / idempotencia.</li>
+</ul>
+</body></html>

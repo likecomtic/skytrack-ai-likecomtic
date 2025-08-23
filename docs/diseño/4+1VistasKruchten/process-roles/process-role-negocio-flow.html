@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="es"><head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Procesos por Rol — Negocio / Producto</title>
+<style>
+body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; line-height:1.6; margin:2rem; max-width:960px; }
+pre { background:#0f172a; color:#e2e8f0; padding:1rem; border-radius:8px; overflow:auto; }
+code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+h1, h2 { color:#0b3d5c; }
+ul { padding-left:1.1rem; }
+</style></head><body>
+<h1>Vista de Procesos por Rol · SkyTrack AI — Negocio / Producto</h1>
+<p><strong>Fecha:</strong> ** 2025-08-23</p>
+<p><strong>Rol:</strong> ** Negocio / Producto</p>
+<p><strong>Objetivo:</strong> ** Ver el **flujo de valor** de &quot;Crear SupplyOrder&quot; en pasos entendibles para stakeholders.</p>
+
+<h2>Flujo (alto nivel)</h2>
+<pre><code>
+flowchart TD
+  A[Recibir POST /supply-orders] --&gt; B{Validar payload}
+  B --&gt;|válido| C[Crear SupplyOrder + ítems]
+  B --&gt;|inválido| E[(400 Bad Request)]
+  C --&gt; D[Responder 201 { id }]
+</code></pre>
+<h2>Puntos de revisión</h2>
+<ul>
+<li>Reglas de validación alineadas con negocio.</li>
+<li>Definición de éxito: 201 + id generado.</li>
+<li>Tratamiento de error funcional (400).</li>
+</ul>
+</body></html>
