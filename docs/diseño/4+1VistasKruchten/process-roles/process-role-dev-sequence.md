@@ -3,10 +3,11 @@
 **Rol:** Desarrollo / Backend
 **Objetivo:** Entender el **orden exacto** de llamadas y respuestas.
 
-## Diagrama de secuencia (limpio)
+> Nota: en GitHub, algunas versiones de Mermaid no soportan `hide footbox`. Se omite para asegurar renderizado.
+
+## Diagrama de secuencia (compatible con GitHub)
 ```mermaid
 sequenceDiagram
-  hide footbox
   autonumber
   participant C as Client
   participant G as API Gateway
