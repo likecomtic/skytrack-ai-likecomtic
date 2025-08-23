@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>4+1 — Vista de Procesos · SkyTrack AI</title>
+<style>
+body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; line-height:1.6; margin:2rem; max-width:960px; }
+pre { background:#0f172a; color:#e2e8f0; padding: 1rem; border-radius: 8px; overflow: auto; }
+code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+h1, h2, h3 { color:#0b3d5c; }
+ul { padding-left:1.2rem; }
+</style>
+</head>
+<body>
+<h1>4+1 — Vista de Procesos · SkyTrack AI</h1>
+<p><strong>Fecha:</strong> ** 2025-08-23</p>
+
+<p><strong>Objetivo:</strong> ** describir cómo fluyen las solicitudes en los casos clave.</p>
+
+<h2>Crear SupplyOrder</h2>
+<pre><code>
+sequenceDiagram
+  participant Client
+  participant API as API Gateway
+  participant SVC as OrderService
+  participant DB as Postgres
+
+  Client-&gt;&gt;API: POST /supply-orders (payload)
+  API-&gt;&gt;SVC: validar + delegar
+  SVC-&gt;&gt;DB: insertar SupplyOrder, items
+  DB--&gt;&gt;SVC: id
+  SVC--&gt;&gt;API: 201 { id }
+  API--&gt;&gt;Client: 201 Created
+</code></pre>
+
+<h2>Registrar TrackingEvent</h2>
+<pre><code>
+sequenceDiagram
+  participant Client
+  participant API as API Gateway
+  participant SVC as EventService
+  participant DB as Postgres
+
+  Client-&gt;&gt;API: POST /tracking-events (orderId, type, at, ...)
+  API-&gt;&gt;SVC: validar + delegar
+  SVC-&gt;&gt;DB: insertar evento (idempotencia)
+  DB--&gt;&gt;SVC: ok
+  SVC--&gt;&gt;API: 201
+  API--&gt;&gt;Client: 201 Created
+</code></pre>
+
+<h2>Errores típicos</h2>
+<ul>
+<li>**400**: `type` inválido / timestamp mal formado.</li>
+<li>**404**: `orderId` no existe.</li>
+<li>**409**: duplicado por idempotencia.</li>
+</ul>
+</body>
+</html>

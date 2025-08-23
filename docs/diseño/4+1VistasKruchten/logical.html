@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>4+1 — Vista Lógica · SkyTrack AI</title>
+<style>
+body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; line-height:1.6; margin:2rem; max-width:960px; }
+pre { background:#0f172a; color:#e2e8f0; padding: 1rem; border-radius: 8px; overflow: auto; }
+code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+h1, h2, h3 { color:#0b3d5c; }
+ul { padding-left:1.2rem; }
+</style>
+</head>
+<body>
+<h1>4+1 — Vista Lógica · SkyTrack AI</h1>
+<p><strong>Fecha:</strong> ** 2025-08-23</p>
+
+<p><strong>Objetivo:</strong> ** aclarar componentes y sus responsabilidades sin entrar a implementación.</p>
+
+<h2>Componentes principales</h2>
+<ul>
+<li>**OrderController / EventController**: validan entrada y delegan al dominio.</li>
+<li>**OrderService / EventService**: reglas de negocio (estado por eventos, idempotencia, validaciones).</li>
+<li>**OrderRepository / EventRepository**: acceso a datos (consultas, persistencia).</li>
+<li>**Validators**: tipos de evento, formatos de tiempo (UTC), existencia de `orderId`.</li>
+<li>**Mappers**: DTO ↔ dominio ↔ persistencia.</li>
+<li>**CSV Import/Export**: batch de entrada/salida (carpetas `csv/in`, `csv/out`).</li>
+
+</ul>
+<h2>Relaciones (diagrama)</h2>
+<pre><code>
+flowchart LR
+  OC[&quot;OrderController&quot;] --&gt; OS[&quot;OrderService&quot;]
+  EC[&quot;EventController&quot;] --&gt; ES[&quot;EventService&quot;]
+
+  subgraph &quot;Dominio&quot;
+    OS --&gt; OR[&quot;OrderRepository&quot;]
+    ES --&gt; ER[&quot;EventRepository&quot;]
+    OS --&gt; V[&quot;Validators&quot;]
+    ES --&gt; V
+    M[&quot;Mappers&quot;] --&gt; OR
+    M --&gt; ER
+  end
+
+  OR --&gt; DB[(Postgres)]
+  ER --&gt; DB
+  CSV[&quot;CSV Import/Export&quot;] --&gt; OS
+</code></pre>
+
+<h2>Decisiones clave</h2>
+<ul>
+<li>**Estado** de la orden = proyección del **último evento válido**.</li>
+<li>**Idempotencia** por clave natural `orderId + type + at` (tolerancia razonable).</li>
+<li>**UTC** para timestamps; validaciones de formato.</li>
+</ul>
+</body>
+</html>

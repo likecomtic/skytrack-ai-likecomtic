@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>4+1 — Vista de Desarrollo · SkyTrack AI</title>
+<style>
+body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; line-height:1.6; margin:2rem; max-width:960px; }
+pre { background:#0f172a; color:#e2e8f0; padding: 1rem; border-radius: 8px; overflow: auto; }
+code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+h1, h2, h3 { color:#0b3d5c; }
+ul { padding-left:1.2rem; }
+</style>
+</head>
+<body>
+<h1>4+1 — Vista de Desarrollo · SkyTrack AI</h1>
+<p><strong>Fecha:</strong> ** 2025-08-23</p>
+
+<p><strong>Objetivo:</strong> ** organizar el proyecto para facilitar evolución y pruebas.</p>
+
+<h2>Estructura propuesta</h2>
+<pre><code>
+src/
+  api/
+    controllers/
+      order.controller.ts
+      event.controller.ts
+    dto/
+      create-order.dto.ts
+      create-event.dto.ts
+  domain/
+    entities/
+      supply-order.ts
+      supply-item.ts
+      tracking-event.ts
+    services/
+      order.service.ts
+      event.service.ts
+    validators/
+      event.validator.ts
+    mappers/
+      order.mapper.ts
+      event.mapper.ts
+  infra/
+    db/
+      migrations/
+      repositories/
+        order.repository.ts
+        event.repository.ts
+      prisma-or-orm-config.ts
+    csv/
+      import.service.ts
+      export.service.ts
+  shared/
+    errors/
+    types/
+    utils/
+config/
+scripts/
+</code></pre>
+
+<h2>Reglas de dependencia</h2>
+<ul>
+<li>**api → domain → infra** (nunca al revés).</li>
+<li>**DTOs** solo en `api/` (no contaminan el dominio).</li>
+<li>**Repositorios** solo desde servicios del dominio.</li>
+<li>**shared/** sin dependencias cíclicas.</li>
+
+</ul>
+<h2>Calidad base</h2>
+<ul>
+<li>Linter + formatter.</li>
+<li>Tests básicos para servicios (y validadores).</li>
+<li>Commits con convención (feat, fix, chore, docs…).</li>
+</ul>
+</body>
+</html>

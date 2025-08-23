@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>4+1 — Vista de Casos de Uso · SkyTrack AI</title>
+<style>
+body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; line-height:1.6; margin:2rem; max-width:960px; }
+pre { background:#0f172a; color:#e2e8f0; padding: 1rem; border-radius: 8px; overflow: auto; }
+code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+h1, h2, h3 { color:#0b3d5c; }
+ul { padding-left:1.2rem; }
+</style>
+</head>
+<body>
+<h1>4+1 — Vista de Casos de Uso (Escenarios) · SkyTrack AI</h1>
+<p><strong>Fecha:</strong> ** 2025-08-23</p>
+
+<p><strong>Objetivo:</strong> ** validar el diseño con situaciones reales y medibles.</p>
+
+<h2>1) Orden on-time</h2>
+<p><strong>Dado** un vuelo con STD 15:</strong> 00Z</p>
+<p><strong>Cuando** los eventos `delivered` y `verified` existen **antes de T-45m**  </strong></p>
+<p><strong>Entonces** la orden se considera **on-time**.</strong></p>
+
+<p><strong>Métrica:</strong> ** % de órdenes con `verified` antes de T-45m.</p>
+
+<h2>2) Faltante detectado y conciliado</h2>
+<p><strong>Dado** una entrega parcial con notas  </strong></p>
+<p><strong>Cuando** se exporta conciliación (CSV out)  </strong></p>
+<p><strong>Entonces** el faltante queda visible para ajuste.</strong></p>
+
+<p><strong>Métrica:</strong> ** tasa de faltantes por tipo de ítem.</p>
+
+<h2>3) Conectividad irregular</h2>
+<p><strong>Dado** registros con intermitencia  </strong></p>
+<p><strong>Cuando** se reintenta el POST de eventos  </strong></p>
+<p><strong>Entonces** la idempotencia evita duplicados.</strong></p>
+
+<p><strong>Métrica:</strong> ** % de 409 frente a 2xx (esperado bajo).</p>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>4+1 — Vista Física · SkyTrack AI</title>
+<style>
+body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; line-height:1.6; margin:2rem; max-width:960px; }
+pre { background:#0f172a; color:#e2e8f0; padding: 1rem; border-radius: 8px; overflow: auto; }
+code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+h1, h2, h3 { color:#0b3d5c; }
+ul { padding-left:1.2rem; }
+</style>
+</head>
+<body>
+<h1>4+1 — Vista Física · SkyTrack AI</h1>
+<p><strong>Fecha:</strong> ** 2025-08-23</p>
+
+<p><strong>Objetivo:</strong> ** despliegue mínimo para demos y práctica.</p>
+
+<h2>Topología (demo)</h2>
+<pre><code>
+flowchart LR
+  Nginx[&quot;Nginx / API Gateway&quot;] --&gt; SVC[&quot;Tracking Service (Container)&quot;]
+  SVC --&gt; DB[(Postgres - Volume)]
+  SVC --&gt; CSV[&quot;CSV Volume (in/out)&quot;]
+</code></pre>
+
+<h2>Consideraciones</h2>
+<ul>
+<li>Variables de entorno (DB URL, JWT secret).</li>
+<li>Volúmenes: **DB** y **CSV** persistentes.</li>
+<li>TLS en Nginx (opcional para demo).</li>
+<li>Logs y métricas desde el día 1.</li>
+</ul>
+</body>
+</html>
